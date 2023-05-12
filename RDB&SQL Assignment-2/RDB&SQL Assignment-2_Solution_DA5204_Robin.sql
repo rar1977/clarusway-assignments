@@ -3,7 +3,6 @@
 -- 1. 'Polk Audio - 50 W Woofer - Black' -- (other_product)
 -- To generate this report, you are required to use the appropriate SQL Server Built-in functions or expressions as well as basic SQL knowledge.
 
-
 --Structure
 select *
 from [sale].[order_item]
@@ -22,19 +21,19 @@ SELECT DISTINCT c.customer_id, c.first_name, c.last_name,
 CASE
     WHEN EXISTS (
         SELECT 1
-        FROM [sale].[orders] o2
-        JOIN [sale].[order_item] oi2 ON o2.order_id = oi2.order_id
-        JOIN [product].[product] p2 ON oi2.product_id = p2.product_id
-        WHERE o2.customer_id = c.customer_id
-        AND p2.product_name = 'Polk Audio - 50 W Woofer - Black'
+        FROM [sale].[orders] o
+        JOIN [sale].[order_item] oi ON o.order_id = oi.order_id
+        JOIN [product].[product] p ON oi.product_id = p.product_id
+        WHERE o.customer_id = c.customer_id
+        AND p.product_name = 'Polk Audio - 50 W Woofer - Black'
     ) THEN 'Yes'
     ELSE 'No'
 END AS Other_Product
 FROM [sale].[customer] c
-JOIN [sale].[orders] o1 ON c.customer_id = o1.customer_id
-JOIN [sale].[order_item] oi1 ON o1.order_id = oi1.order_id
-JOIN [product].[product] p1 ON oi1.product_id = p1.product_id
-WHERE p1.product_name = '2TB Red 5400 rpm SATA III 3.5 Internal NAS HDD'
+JOIN [sale].[orders] o ON c.customer_id = o.customer_id
+JOIN [sale].[order_item] oi ON o.order_id = oi.order_id
+JOIN [product].[product] p ON oi.product_id = p.product_id
+WHERE p.product_name = '2TB Red 5400 rpm SATA III 3.5 Internal NAS HDD'
 
 
 --- 2. Conversion Rate
@@ -77,12 +76,12 @@ GROUP BY
 -- c.    Calculate Orders (Conversion) rates for each Advertisement Type by dividing by total count of actions casting as float by multiplying by 1.0.
 --Solution 2
 SELECT 
-    Adv_Type, 
-    ROUND((SUM(CASE WHEN Action = 'Order' THEN 1 ELSE 0 END) * 1.0 / COUNT(*)), 2) AS Conversion_Rate
+	Adv_Type, 
+	CAST(SUM(CASE WHEN Action = 'Order' THEN 1 ELSE 0 END) * 1.00 / COUNT(*) AS DECIMAL(3,2)) AS Conversion_Rate
 FROM 
-    Actions 
+	Actions
 GROUP BY 
-    Adv_Type;
+	Adv_Type;
 
 
 

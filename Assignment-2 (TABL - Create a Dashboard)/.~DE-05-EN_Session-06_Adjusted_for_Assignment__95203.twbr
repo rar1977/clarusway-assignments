@@ -486,10 +486,12 @@
       <column datatype='string' name='[Country/Region]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
       <column datatype='string' name='[Postal Code]' role='dimension' semantic-role='[ZipCode].[Name]' type='nominal' />
       <column datatype='real' default-format='c#,##0;(#,##0)' name='[Profit]' role='measure' type='quantitative' />
+      <column datatype='string' name='[Region]' role='dimension' type='nominal' />
       <column datatype='integer' name='[Row ID]' role='dimension' type='ordinal' />
       <column datatype='string' name='[State/Province]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
       <_.fcp.ObjectModelTableType.true...column caption='Orders' datatype='table' name='[__tableau_internal_object_id__].[Orders_F131960B802E4379827229BB2C4D2295]' role='measure' type='quantitative' />
       <column-instance column='[Category]' derivation='None' name='[none:Category:nk]' pivot='key' type='nominal' />
+      <column-instance column='[Region]' derivation='None' name='[none:Region:nk]' pivot='key' type='nominal' />
       <column-instance column='[Calculation_1078049193260724234]' derivation='User' name='[usr:Calculation_1078049193260724234:nk]' pivot='key' type='nominal' />
       <column-instance column='[Calculation_1078049193262080011]' derivation='User' name='[usr:Calculation_1078049193262080011:nk]' pivot='key' type='nominal' />
       <extract _.fcp.ObjectModelExtractV2.true...object-id='' _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' units='records'>
@@ -841,6 +843,20 @@
               <bucket>&quot;Furniture&quot;</bucket>
             </map>
           </encoding>
+          <encoding attr='color' field='[none:Region:nk]' palette='sf_bluegrass' type='palette'>
+            <map to='#27aab0'>
+              <bucket>&quot;West&quot;</bucket>
+            </map>
+            <map to='#51d2bb'>
+              <bucket>&quot;South&quot;</bucket>
+            </map>
+            <map to='#94e7a8'>
+              <bucket>&quot;East&quot;</bucket>
+            </map>
+            <map to='#c7f296'>
+              <bucket>&quot;Central&quot;</bucket>
+            </map>
+          </encoding>
         </style-rule>
       </style>
       <semantic-values>
@@ -906,6 +922,7 @@
         <style>
           <style-rule element='mark'>
             <encoding attr='size-bar' field='[federated.0ci89c90363o3g1640qts13s7llx].[sum:Sales:qk]' field-type='quantitative' max-size='1' min-size='0.005' type='centersize' />
+            <encoding attr='color' field='[federated.0ci89c90363o3g1640qts13s7llx].[sum:Sales:qk]' palette='tableau-map-blue-green' type='interpolated' />
           </style-rule>
         </style>
         <panes>
@@ -1192,6 +1209,11 @@
               <breakdown value='auto' />
             </view>
             <mark class='Automatic' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-color' value='#76b7b2' />
+              </style-rule>
+            </style>
           </pane>
         </panes>
         <rows>[federated.0ci89c90363o3g1640qts13s7llx].[sum:Profit:qk]</rows>
@@ -1950,11 +1972,11 @@
         </title>
       </layout-options>
       <style />
-      <size maxheight='2000' maxwidth='2000' minheight='2000' minwidth='2000' preset-index='0' sizing-mode='fixed' />
+      <size maxheight='1600' maxwidth='2000' minheight='1600' minwidth='2000' preset-index='0' sizing-mode='fixed' />
       <zones>
         <zone h='100000' id='4' type-v2='layout-basic' w='100000' x='0' y='0'>
-          <zone h='66282' id='12' param='horz' type-v2='layout-flow' w='99100' x='450' y='450'>
-            <zone h='66282' id='5' param='vert' type-v2='layout-flow' w='91100' x='450' y='450'>
+          <zone h='49550' id='12' param='horz' type-v2='layout-flow' w='99100' x='450' y='450'>
+            <zone h='49550' id='5' param='vert' type-v2='layout-flow' w='91100' x='450' y='450'>
               <zone h='2100' id='7' type-v2='title' w='91100' x='450' y='450'>
                 <zone-style>
                   <format attr='border-color' value='#000000' />
@@ -1963,8 +1985,8 @@
                   <format attr='margin' value='4' />
                 </zone-style>
               </zone>
-              <zone h='64182' id='6' type-v2='layout-basic' w='91100' x='450' y='2550'>
-                <zone forceUpdate='' h='32091' id='8' param='www.clarusway.de' type-v2='web' w='91100' x='450' y='2550'>
+              <zone h='47450' id='6' type-v2='layout-basic' w='91100' x='450' y='2550'>
+                <zone forceUpdate='' h='15119' id='8' param='www.clarusway.de' type-v2='web' w='91100' x='450' y='2550'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -1972,8 +1994,8 @@
                     <format attr='margin' value='4' />
                   </zone-style>
                 </zone>
-                <zone h='32091' id='9' param='horz' type-v2='layout-flow' w='91100' x='450' y='34641'>
-                  <zone fixed-size='722' h='32091' id='10' is-fixed='true' name='Donut Chart' w='36500' x='450' y='34641'>
+                <zone h='32331' id='9' param='horz' type-v2='layout-flow' w='91100' x='450' y='17669'>
+                  <zone fixed-size='722' h='32331' id='10' is-fixed='true' name='Donut Chart' w='36500' x='450' y='17669'>
                     <layout-cache minwidth='100' type-h='fixed' type-w='scalable' />
                     <zone-style>
                       <format attr='border-color' value='#000000' />
@@ -1982,7 +2004,7 @@
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
-                  <zone fixed-size='431' h='32091' id='17' is-fixed='true' name='Analysis/Total' w='21950' x='36950' y='34641'>
+                  <zone fixed-size='431' h='32331' id='17' is-fixed='true' name='Analysis/Total' w='21950' x='36950' y='17669'>
                     <layout-cache type-h='fixed' type-w='fixed' />
                     <zone-style>
                       <format attr='border-color' value='#000000' />
@@ -1991,7 +2013,7 @@
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
-                  <zone h='32091' id='15' name='Editing Table Calc. with Cell' w='32648' x='58900' y='34641'>
+                  <zone h='32331' id='15' name='Editing Table Calc. with Cell' w='32648' x='58900' y='17669'>
                     <layout-cache cell-count-w='4' non-cell-size-w='144' type-h='fixed' type-w='cell' />
                     <zone-style>
                       <format attr='border-color' value='#000000' />
@@ -2003,7 +2025,7 @@
                 </zone>
               </zone>
             </zone>
-            <zone fixed-size='160' h='66282' id='11' is-fixed='true' param='vert' type-v2='layout-flow' w='8000' x='91550' y='450'>
+            <zone fixed-size='160' h='49550' id='11' is-fixed='true' param='vert' type-v2='layout-flow' w='8000' x='91550' y='450'>
               <zone h='4300' id='13' name='Donut Chart' pane-specification-id='1' param='[federated.0ci89c90363o3g1640qts13s7llx].[none:Category:nk]' type-v2='color' w='8000' x='91550' y='450'>
                 <zone-style>
                   <format attr='border-color' value='#000000' />
@@ -2038,7 +2060,7 @@
               </zone>
             </zone>
           </zone>
-          <zone h='32818' id='19' name='Data Aggregation / Disaggregation' w='99100' x='450' y='66732'>
+          <zone h='49550' id='19' name='Data Aggregation / Disaggregation' w='99100' x='450' y='50000'>
             <zone-style>
               <format attr='border-color' value='#000000' />
               <format attr='border-style' value='none' />
@@ -2175,7 +2197,7 @@
     </dashboard>
   </dashboards>
   <windows source-height='30'>
-    <window class='worksheet' maximized='true' name='Data Aggregation / Disaggregation'>
+    <window class='worksheet' name='Data Aggregation / Disaggregation'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -2627,7 +2649,7 @@
       </viewpoint>
       <simple-id uuid='{9AD18DFD-08A2-4307-A105-D6344DA054BD}' />
     </window>
-    <window class='dashboard' name='Dashboard_Assignment'>
+    <window class='dashboard' maximized='true' name='Dashboard_Assignment'>
       <viewpoints>
         <viewpoint name='Analysis/Total' />
         <viewpoint name='Data Aggregation / Disaggregation'>
@@ -2640,7 +2662,7 @@
           <zoom type='entire-view' />
         </viewpoint>
       </viewpoints>
-      <active id='19' />
+      <active id='4' />
       <device-preview visible='true' />
       <simple-id uuid='{305DC445-E2BA-4DF0-95B8-D4FB7E53715E}' />
     </window>
